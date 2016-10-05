@@ -1,3 +1,105 @@
 options {
     STATIC = false;
 }
+
+/* --------------------------------------- BEGIN Lexical specification */
+SKIP : 
+{ 
+	  " " 
+	| "\t" 
+	| "\n" 
+	| "\r" 
+	| <"#" (~["\n","\r"])* ("\n"|"\r"|"\r\n")> 
+}
+
+// Reserved words
+TOKEN : 
+{ 
+	  < THRUST: "thrust" > 
+	| < IF: "if" > 
+	| < WHILE: "while" > 
+	| < DO: "do" > 
+	| < STOP: "STOP" > 
+	| < LET : "let" >
+}
+
+// Language symbols
+TOKEN :
+{
+	  < EOS: "." >
+	| < COLON: ":" >
+	| < FUNCTION: "$" >
+	| < RETURN: "->" >
+	| < ACK: "ack" >
+}
+
+// Math Operation Symbols
+TOKEN :
+{
+	| < PLUS: "+">
+	| < MINUS: "-" >
+	| < MUL: "*" >
+	| < DIV: "/" >
+	| < MOD: "%" >
+	| < POW: "^" >
+	| < ASSIGN: "=" >
+}
+
+// Math Relational Symbols
+TOKEN :
+{
+	| < EQ: "==" >
+	| < GT: ">"  >
+	| < LT: "<"  >
+	| < GE: ">=" >
+	| < LE: "<=" >
+	| < NE: "!=" >
+}
+
+// Data types
+TOKEN : 
+{
+  	  < INTEGER_LITERAL: (\+|-)?\d+ >
+  	| < DOUBLE : (\+|-)?\d+.\d+ >
+  	| < STRING : \"(\D|\d|\s|\S)*\"" > // Remover "
+}
+
+// Identifiers
+TOKEN :
+{
+	   < IDENTIFIER: <LETTER> (<LETTER>|<DIGIT>)* >
+	|  < #LETTER: ["_","a"-"z","A"-"Z"] >
+	|  < #DIGIT: ["0"-"9"] >
+}
+
+/* --------------------------------------- END Lexical specification */
+
+/* --------------------------------------- BEGIN Parser specification */
+void Start():{}
+{
+  (
+    Thrust() <EOS>
+  )*
+
+  "main"
+  (
+    StatementExpression()
+  )*
+}
+
+
+
+/* --------------------------------------- END Parser specification */
+
+
+
+
+
+
+
+
+
+
+
+
+
