@@ -3,11 +3,11 @@ options {
 }
 
 PARSER_BEGIN(Shabootyquiqui)
+
 import java.io.*;
-public class SimpleParser {
+public class Shabootyquiqui {
   public static void main (String args[] ) throws ParseException {
-    SimpleParser parser = new SimpleParser(System.in);
-    System.out.println(val);
+    Shabootyquiqui parser = new Shabootyquiqui(System.in);
   }
 }
 
@@ -47,7 +47,7 @@ TOKEN :
 // Math Operation Symbols
 TOKEN :
 {
-	| < PLUS: "+">
+	  < PLUS: "+">
 	| < MINUS: "-" >
 	| < MUL: "*" >
 	| < DIV: "/" >
@@ -59,7 +59,7 @@ TOKEN :
 // Math Relational Symbols
 TOKEN :
 {
-	| < EQ: "==" >
+	  < EQ: "==" >
 	| < GT: ">"  >
 	| < LT: "<"  >
 	| < GE: ">=" >
@@ -70,9 +70,9 @@ TOKEN :
 // Data types
 TOKEN : 
 {
-  	  < INTEGER_LITERAL: (\+|-)?\d+ >
-  	| < DOUBLE : (\+|-)?\d+.\d+ >
-  	| < STRING : \"(\D|\d|\s|\S)*\"" > // Remover "
+  	  < INTEGER_LITERAL: ("+"|"-")?(["0"-"9"])+ >
+  	| < DOUBLE : ("+"|"-")?(["0"-"9"])+"."(["0"-"9"])+ >
+  	| < STRING : "\'"(["0"-"9"]|" "|["a"-"z"]|["A"-"Z"])+"\'" >
 }
 
 // Identifiers
@@ -107,16 +107,3 @@ void Thrust():{}
 }
 
 /* --------------------------------------- END Parser specification */
-
-
-
-
-
-
-
-
-
-
-
-
-
