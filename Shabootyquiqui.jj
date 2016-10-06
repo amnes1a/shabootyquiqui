@@ -2,6 +2,17 @@ options {
     STATIC = false;
 }
 
+PARSER_BEGIN(Shabootyquiqui)
+import java.io.*;
+public class SimpleParser {
+  public static void main (String args[] ) throws ParseException {
+    SimpleParser parser = new SimpleParser(System.in);
+    System.out.println(val);
+  }
+}
+
+PARSER_END(Shabootyquiqui)
+
 /* --------------------------------------- BEGIN Lexical specification */
 SKIP : 
 { 
@@ -79,7 +90,7 @@ void Start():{}
 {
   (
     Thrust() <EOS>
-  )*
+  )+
 
   "main"
   (
@@ -87,7 +98,13 @@ void Start():{}
   )*
 }
 
-
+void Thrust():{}
+{
+	<THRUST> 
+	(
+		<IDENTIFIER>
+	)+
+}
 
 /* --------------------------------------- END Parser specification */
 
